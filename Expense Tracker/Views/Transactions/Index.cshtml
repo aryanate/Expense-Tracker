@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Expense_Tracker.Models.Transaction>
+
+@{
+    ViewData["PageTitle"] = "Transactions";
+    ViewData["PageActionText"] = "Add New Transaction";
+    ViewData["PageActionURL"] = "/Transactions/AddorEdit/";
+}
+
+
+<div class="row">
+    <div class="col-md-7 e-grid">
+        <ejs-grid id="transactions" dataSource="@Model" gridLines="None" allowSorting="true" allowPaging="true">
+            <e-grid-pagesettings pageSize="5"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="Category" field="CategoriesWithIcon" width="100px"></e-grid-column>
+                <e-grid-column headerText="Date" field="Date" width="90px" textalign="Left" type="date" format="MMM-dd-yy"></e-grid-column>
+                <e-grid-column headerText="Amount" field="FormatedAmount" width="90px" textalign="Right"></e-grid-column>
+                <e-grid-column headerText="Actions" template="#Actiontemplate" width="90px"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+    <div class="col-md-5">
+        <div class="widget h-100 d-flex justify-content-center align-items-center" style="background-color:#212b36">
+            <i class="fa-solid fa-money-bill-transfer fa-2xl"></i>
+        </div>
+    </div>
+</div>
+<script id="Actiontemplate" type="text/x-template">
+    <div class="d-flex flex-column justify-content-evenly">
+         <a class="btn no-a-decoration btn-sm" href="/Transactions/AddorEdit/${TransactionId}">
+             <i class="fa-solid fa-pen fa-lg"></i>
+        </a>
+          <a class="btn no-a-decoration btn-sm" href="/Transactions/Delete/${TransactionId}">
+               <i class="fa-solid fa-trash fa-lg"></i>
+         </a>
+    </div>
+</script>
